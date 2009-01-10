@@ -5,7 +5,7 @@ set :application, "netlar.com"
 set :deploy_to, "/home/lwells/public_html/#{application}"
 
 # #############################################################
-# # Settings
+# # Settings going to change this
 # #############################################################
  
 default_run_options[:pty] = true

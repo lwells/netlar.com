@@ -1,40 +1,36 @@
-# #############################################################
-# # Application
-# #############################################################
+
+default_run_options[:pty] = true
+set :repository,  "git://github.com/lwells/netlar.com.git"
+set :scm, "git"
+set :branch, "master"
+set :deploy_via, :remote_cache
+
 set :application, "netlar.com"
 set :deploy_to, "/home/lwells/public_html/#{application}"
-
-# #############################################################
-# # Settings going to change this
-# #############################################################
- 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
-set :use_sudo, true
-set :scm_verbose, true
-
-# #############################################################
-# # Servers
-# #############################################################
-  
+ssh_options[:port] = 30000
 set :user, "lwells"
-set :user_passphrase, "violet99"
-set :domain, "173.45.236.146"
-server domain, :app, :web
-role :db, domain, :primary => true
-set :port, 30000
+set :admin_runner, "lwells"
 
-# #############################################################
-# # Git
-# #############################################################
+# If you aren't deploying to /u/apps/#{application} on the target
+# servers (which is the default), you can specify the actual location
+# via the :deploy_to variable:
+# set :deploy_to, "/var/www/#{application}"
 
-set :scm, :git
-set :branch, "master"
-set :scm_user, "lwells"
-set :scm_passphrase, "violet"
-set :repository, "git@github.com:lwells/netlar.com.git"
-set :deploy_via, :remote_cache
+# If you aren't using Subversion to manage your source code, specify
+# your SCM below:
+# set :scm, :subversion
 
 role :app, "netlar.com"
 role :web, "netlar.com"
 role :db,  "netlar.com", :primary => true
+
+namespace :deploy do
+	  desc "Restart Application"
+	  task :restart, :roles => :app do
+	    run "touch #{current_path}/tmp/restart.txt"
+	  end
+	  desc "Start Application -- not needed for Passenger"
+	  task :start, :roles => :app do
+	    # nothing -- need to override default cap start task when using Passenger
+	  end
+	end

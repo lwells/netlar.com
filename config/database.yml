@@ -18,8 +18,8 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql
-  database: netlar_production
-  username: lwells
-  password: violet99
-  host: localhost
+  adapter: 
+  database: 
+  username: 
+  password: 
+  host: 

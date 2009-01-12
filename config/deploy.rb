@@ -11,15 +11,6 @@ ssh_options[:port] = 30000
 set :user, "lwells"
 set :admin_runner, "lwells"
 
-# If you aren't deploying to /u/apps/#{application} on the target
-# servers (which is the default), you can specify the actual location
-# via the :deploy_to variable:
-# set :deploy_to, "/var/www/#{application}"
-
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-# set :scm, :subversion
-
 role :app, "netlar.com"
 role :web, "netlar.com"
 role :db,  "netlar.com", :primary => true

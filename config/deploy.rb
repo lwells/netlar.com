@@ -1,4 +1,4 @@
-
+#This is the configuration file for deployment
 default_run_options[:pty] = true
 set :repository,  "git://github.com/lwells/netlar.com.git"
 set :scm, "git"
